@@ -19,9 +19,9 @@
     function Sheet1($resource) {
 	    this.daysInYear = 366;
 	    this.months = [
-	      { days: 31 }, 
-	      { days: 28 }, 
-	      { days: 30 } 			
+	      { name: "Jan", days: 31 }, 
+	      { name: "Feb", days: 28 }, 
+	      { name: "Mar", days: 30 } 			
 	    ];
     }
 	
@@ -32,9 +32,14 @@
   <p>Months and their percentage of the year (leap years)</p>
   <table>
       <tr>
-          <th ng:repeat="month in months" class="numCell">{{month.days}}</th>
-		  <th class="numCell"></th>
-		  <th class="numCell">{{months.$sum('days')}}</th>
+          <th ng:repeat="month in months" class="cell">{{month.name}}</th>
+		  <th class="cell"></th>
+		  <th>Tot</th>
+      </tr>
+      <tr>
+          <td ng:repeat="month in months" class="numCell">{{month.days}}</td>
+		  <td class="numCell"></td>
+		  <td class="numCell">{{months.$sum('days')}}</td>
       </tr>
       <tr>
           <td class="numCell">{{daysInYear}}</td>
