@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns:ng="http://angularjs.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Angular spreadsheet example</title>
+  <script type="text/javascript" ng:autobind src="http://code.angularjs.org/0.9.19/angular-0.9.19.min.js"></script>
+  <style type="text/css">
+    table { border: 1px solid rgb(153, 153, 153); border-collapse: collapse; width: 300px; }
+    th { background-color: rgb(238, 238, 238); }
+    .cell { padding: 4px; border: 1px solid rgb(153, 153, 153); overflow: auto; min-width: 100px; max-width: 100px; }
+    .numCell { padding: 4px; border: 1px solid rgb(153, 153, 153); overflow: auto; min-width: 100px; max-width: 100px; text-align: right; }
+    .widecell { min-width: 200px; max-width: 400px; }
+</style>
+</head>
+<body ng:controller="Sheet1">
+	
+<script type="text/javascript">
+    function Sheet1($resource) {
+	    this.daysInYear = 366;
+	    this.months = [
+	      { days: 31 }, 
+	      { days: 28 }, 
+	      { days: 30 } 			
+	    ];
+    }
+	
+	Sheet1.$inject = ["$resource"];
+	
+</script>	
+	
+  <p>Months and their percentage of the year (leap years)</p>
+  <table>
+      <tr>
+          <th ng:repeat="month in months" class="numCell">{{month.days}}</th>
+		  <th class="numCell"></th>
+		  <th class="numCell">{{months.$sum('days')}}</th>
+      </tr>
+      <tr>
+          <td class="numCell">{{daysInYear}}</td>
+      </tr>
+      <tr>
+          <td ng:repeat="month in months" class="numCell">{{month.days / daysInYear *100 | number:3 }}%</td>
+		  <td class="numCell"></td>
+		  <td class="numCell">{{months.$sum('days') / daysInYear *100 | number:3}}%</td>		  
+      </tr>	  
+  </table>
+</body>
+
+
+</html>
